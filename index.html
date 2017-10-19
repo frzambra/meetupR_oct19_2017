@@ -236,6 +236,7 @@
 Roger Bivand and Nicholas Lewin-Koh (2017). maptools: <a href="https://CRAN.R-project.org/package=maptools">Tools for Reading and Handling Spatial Objects. R package version 0.8-41</a></p></li>
 <li><p><code>raster</code>: series temporales de datos grillados geo-espaciales.<br>
 Robert J. Hijmans (2016). raster: <a href="https://CRAN.R-project.org/package=raster">Geographic Data Analysis and Modeling. R package version 2.5-8</a></p></li>
+<li><p><code>rgeos &amp; rgdal</code>: interfaces para GEOS y GDAL.</p></li>
 </ul>
 
 </div>
@@ -338,14 +339,14 @@ ndvi &lt;- raster(&#39;spatial_data/raster/NDVI.tif&#39;)
 #Superficie de riego (Vectorial)
 shp.f &lt;- ggplot2::fortify(shp,region=&#39;coddis&#39;)
 p1 &lt;- ggplot() +
-  geom_map(data=shp@data,aes(map_id = coddis,fill=as.numeric(sup_riego)),colour=NA,map = shp.f,size=0.05) +
-  geom_polygon(data=shp.f,aes(x=long,y=lat,group=group),color=&#39;black&#39;,fill=NA)+
+  geom_map(data=shp@data,aes(map_id = coddis,fill=as.numeric(sup_riego)),colour=NA,map = shp.f) +
+  geom_polygon(data=shp.f,aes(x=long,y=lat,group=group),color=&#39;black&#39;,size=0.05,fill=NA)+
   scale_fill_gradientn(&#39;Anomalía Sup. riego&#39;,colours = rev(terrain.colors(10)))+
   labs(title=&#39;Superficie de riego por distrito censal&#39;,
   subtitle=&#39;Región de Coquimbo a Región de Los Ríos&#39;)+
   coord_equal()+
   theme_minimal()+
-  theme(legend.position=c(.25,.7))
+  theme(legend.position=c(.35,.7))
 </code></pre>
 
   </article>

@@ -135,6 +135,7 @@ Roger Bivand and Nicholas Lewin-Koh (2017). maptools: [Tools for Reading and Han
 - `raster`: series temporales de datos grillados geo-espaciales.  
 Robert J. Hijmans (2016). raster: [Geographic Data Analysis and Modeling. R package version 2.5-8](https://CRAN.R-project.org/package=raster)
 
+- `rgeos & rgdal`: interfaces para GEOS y GDAL.
 
 *** =right
 
@@ -212,14 +213,14 @@ library(ggplot2)
 #Superficie de riego (Vectorial)
 shp.f <- ggplot2::fortify(shp,region='coddis')
 p1 <- ggplot() +
-  geom_map(data=shp@data,aes(map_id = coddis,fill=as.numeric(sup_riego)),colour=NA,map = shp.f,size=0.05) +
-  geom_polygon(data=shp.f,aes(x=long,y=lat,group=group),color='black',fill=NA)+
+  geom_map(data=shp@data,aes(map_id = coddis,fill=as.numeric(sup_riego)),colour=NA,map = shp.f) +
+  geom_polygon(data=shp.f,aes(x=long,y=lat,group=group),color='black',size=0.05,fill=NA)+
   scale_fill_gradientn('Anomalía Sup. riego',colours = rev(terrain.colors(10)))+
   labs(title='Superficie de riego por distrito censal',
   subtitle='Región de Coquimbo a Región de Los Ríos')+
   coord_equal()+
   theme_minimal()+
-  theme(legend.position=c(.25,.7))
+  theme(legend.position=c(.35,.7))
 ```
 
 ---

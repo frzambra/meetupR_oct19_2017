@@ -185,9 +185,25 @@ library(maptools)
 shp <- readShapePoly('spatial_data/vectorial/riegominis_r4_r14.shp',proj4string=CRS("+proj=longlat +datum=WGS84"))
 shp@data$sup_riego <- scale(shp@data$sup_riego)
 shp@data$sup_riego[shp@data$sup_riego>3] <- NA
+class(shp)
+```
 
+```
+## [1] "SpatialPolygonsDataFrame"
+## attr(,"package")
+## [1] "sp"
+```
+
+```r
 library(raster)
 ndvi <- raster('spatial_data/raster/NDVI.tif')
+class(ndvi)
+```
+
+```
+## [1] "RasterLayer"
+## attr(,"package")
+## [1] "raster"
 ```
 
 ---&twocol

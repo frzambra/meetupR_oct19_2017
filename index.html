@@ -298,9 +298,22 @@ Pebesma, E.J., 2004. Multivariable geostatistics in S: the gstat package.Compute
 shp &lt;- readShapePoly(&#39;spatial_data/vectorial/riegominis_r4_r14.shp&#39;,proj4string=CRS(&quot;+proj=longlat +datum=WGS84&quot;))
 shp@data$sup_riego &lt;- scale(shp@data$sup_riego)
 shp@data$sup_riego[shp@data$sup_riego&gt;3] &lt;- NA
+class(shp)
+</code></pre>
 
-library(raster)
+<pre><code>## [1] &quot;SpatialPolygonsDataFrame&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;sp&quot;
+</code></pre>
+
+<pre><code class="r">library(raster)
 ndvi &lt;- raster(&#39;spatial_data/raster/NDVI.tif&#39;)
+class(ndvi)
+</code></pre>
+
+<pre><code>## [1] &quot;RasterLayer&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;raster&quot;
 </code></pre>
 
   </article>

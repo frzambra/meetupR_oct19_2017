@@ -1,0 +1,15 @@
+# Editor backup files
+*~
+
+# History files
+.Rhistory
+*.Rapp.history
+
+# R data files from past sessions
+.Rdata
+.Rproj.user
+
+# folders
+cache/
+
+

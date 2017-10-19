@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R para análisis de información geo-espacial</title>
+  <meta charset="utf-8">
+  <meta name="description" content="R para análisis de información geo-espacial">
+  <meta name="author" content="Francisco Zambrano">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+<link rel=stylesheet href="./assets/css/style.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+      <slide class="nobackground">
+    <article class="flexbox vcenter">
+      <span>
+        <img width='300px' src="assets/img/escudo_udec.png">
+      </span>
+    </article>
+  </slide>
+    <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/escudo_udec2.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>R para análisis de información geo-espacial</h1>
+    <h2></h2>
+    <p>Francisco Zambrano<br/>Universidad de Concepción</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Background</h2>
+  </hgroup>
+  <article data-timings="">
+    <!-- >- Trabajo relacionado a la agricultura y los recursos hídricos -->
+
+<!-- >- UdeC, CNR, INDAP, DGA, INIA -->
+
+<!-- >- Indicador de sequía agrícola (VCI) -->
+
+<!-- >- Inicio doctorado año 2013 -->
+
+<!-- >- Linea de investigación: Sequía agrícola en Chile -->
+
+<div style='text-align: center;'>
+ <img width='100%' src='./assets/img/background_image.png' />
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue" id="slide-2" style="background:grey;">
+  <hgroup>
+    <h1>I Información geo-espacial</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>¿Qué son datos geo-espaciales?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><code>Espacial</code>: Datos que tienen un lugar en el espacio (ej. posición, x,y,z)  </p>
+
+<p><code>Geo-espacial</code>: Datos que tiene una posición geográfica (ej. latitud, longitud)</p>
+
+<h2>¿Por qué son importantes?</h2>
+
+<ul>
+<li>La mayoria de las actividades humanas estan directa o indirectamente vinculadas a la localización geográfica.</li>
+<li>~80% de los datos tienen una componente de localización.</li>
+</ul>
+
+<div style='text-align: center;'>
+ <img width='60%' src='./assets/img/fagan_quote.png' />
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Tipos de datos geo-espaciales</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><code>Vectorial</code>: Formas simples de representación por geometrías. Puntos, lineas, poligonos.  </p>
+
+<div style='text-align: center;'>
+ <img width='100%' src='./assets/img/vectorial_types.png' />
+</div>
+
+<p><code>Raster</code>: Representación con datos grillados.   </p>
+
+<div style='text-align: center;'>
+ <img width='35%' src='./assets/img/raster_type.png' />
+</div>
+
+</div>
+<div style='float:right;width:48%;'>
+  <div style='text-align: center;'>
+ <img width='100%' src='./assets/img/raster_vector_real_world.jpg' />
+</div>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Sistemas de Información Geográfica (SIG)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>SIG: Herramientas que integran y permiten la organización, almacenamiento, manipulación, análisis y modelización de grandes cantidades de datos geoespaciales.</li>
+</ul>
+
+<div style='text-align: center;'>
+ <img width='100%' src='./assets/img/gis_softwares.png' />
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue" id="slide-6" style="background:grey;">
+  <hgroup>
+    <h1>R como Sistema de Información Geográfica (SIG)</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Paquete <code>sp</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Hasta antes del 2005 <code>R</code> no tenía soporte para manejo y análisis de información <code>geo-espacial</code>.</li>
+</ul>
+
+<iframe src="https://cran.r-project.org/web/packages/sp/index.html" width=100% align="right" allowtransparency="true"> </iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Paquete <code>sp</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <blockquote>
+<p>Pebesma, E.J., R.S. Bivand, 2005. Classes and methods for spatial data in R. R
+  News 5 (2)<a href="https://cran.r-project.org/doc/Rnews/Rnews_2005-2.pdf">https://cran.r-project.org/doc/Rnews/Rnews_2005-2.pdf</a></p>
+</blockquote>
+
+<div style='text-align: center;'>
+ <img width='80%' src='./assets/img/classess_sp.png' />
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Análisis geo-espacial</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>Roger S. Bivand, Edzer Pebesma, Virgilio Gomez-Rubio, 2013. [Applied spatial data analysis with R, Second edition. Springer, NY].(<a href="http://www.asdar-book.org/">http://www.asdar-book.org/</a>)</li>
+<li>Primera publicación el año 2008.</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <div style='text-align: center;'>
+ <img width='80%' src='./assets/img/R_spatial_book.jpg' />
+</div>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Análisis geo-espacial</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><strong>Principales paquetes</strong></p>
+
+<ul>
+<li><p><code>maptools</code>: manejo de datos vectoriales ESRI shapefiles (.shp).<br>
+Roger Bivand and Nicholas Lewin-Koh (2017). maptools: <a href="https://CRAN.R-project.org/package=maptools">Tools for Reading and Handling Spatial Objects. R package version 0.8-41</a></p></li>
+<li><p><code>raster</code>: series temporales de datos grillados geo-espaciales.<br>
+Robert J. Hijmans (2016). raster: <a href="https://CRAN.R-project.org/package=raster">Geographic Data Analysis and Modeling. R package version 2.5-8</a></p></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><strong>Dependencias de sp</strong></p>
+
+<p><img src="figure/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1"></p>
+
+<pre><code>## IGRAPH DN-- 94 93 -- 
+## + attr: name (v/c), relation (e/c), color (e/c)
+## + edges (vertex names):
+##  [1] CAMAN             -&gt;sp DeducerSpatial    -&gt;sp DivE              -&gt;sp
+##  [4] ENiRG             -&gt;sp FedData           -&gt;sp FeedbackTS        -&gt;sp
+##  [7] GISTools          -&gt;sp GWmodel           -&gt;sp Grid2Polygons     -&gt;sp
+## [10] INLABMA           -&gt;sp KappaV            -&gt;sp MBA               -&gt;sp
+## [13] MUCflights        -&gt;sp MapGAM            -&gt;sp MetaLandSim       -&gt;sp
+## [16] RandomFields      -&gt;sp RapidPolygonLookup-&gt;sp SPODT             -&gt;sp
+## [19] SSN               -&gt;sp SpatialEpi        -&gt;sp UScensus2000cdp   -&gt;sp
+## [22] UScensus2000tract -&gt;sp UScensus2010      -&gt;sp Watersheds        -&gt;sp
+## + ... omitted several edges
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Análisis geo-espacial</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><strong>Principales paquetes</strong></p>
+
+<ul>
+<li><code>gstat</code>: análisis geo-estadístico espacio-temporal.<br>
+Pebesma, E.J., 2004. Multivariable geostatistics in S: the gstat package.Computers &amp; Geosciences, 30: 683-691.<br></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <div style='text-align: center;'>
+ <img width='80%' src='./assets/img/A-Practical-Guide-to-Geostatistical-Mapping.jpg' />
+</div>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Visualización con <code>maptools</code> y <code>raster</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(maptools)
+shp &lt;- readShapePoly(&#39;spatial_data/vectorial/riegominis_r4_r14.shp&#39;,proj4string=CRS(&quot;+proj=longlat +datum=WGS84&quot;))
+shp@data$sup_riego &lt;- scale(shp@data$sup_riego)
+shp@data$sup_riego[shp@data$sup_riego&gt;3] &lt;- NA
+
+library(raster)
+ndvi &lt;- raster(&#39;spatial_data/raster/NDVI.tif&#39;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Visualización con <code>maptools</code> y <code>raster</code></h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>sp::spplot(shp,zcol=&#39;sup_riego&#39;)</p>
+
+<p><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>raster::plot(ndvi)</p>
+
+<p><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Visualización con <code>ggplot2</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(ggplot2)
+
+#Superficie de riego (Vectorial)
+shp.f &lt;- ggplot2::fortify(shp,region=&#39;coddis&#39;)
+p1 &lt;- ggplot() +
+  geom_map(data=shp@data,aes(map_id = coddis,fill=as.numeric(sup_riego)),colour=NA,map = shp.f,size=0.05) +
+  geom_polygon(data=shp.f,aes(x=long,y=lat,group=group),color=&#39;black&#39;,fill=NA)+
+  scale_fill_gradientn(&#39;Anomalía Sup. riego&#39;,colours = rev(terrain.colors(10)))+
+  labs(title=&#39;Superficie de riego por distrito censal&#39;,
+  subtitle=&#39;Región de Coquimbo a Región de Los Ríos&#39;)+
+  coord_equal()+
+  theme_minimal()+
+  theme(legend.position=c(.25,.7))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Visualización con <code>ggplot2</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r"># NDVI (raster)
+ndvi.p &lt;- data.frame(raster::rasterToPoints(ndvi))
+
+p2 &lt;- ggplot(NULL, aes(x, y)) +
+  geom_raster(data = ndvi.p, aes(fill = NDVI)) +
+  scale_fill_gradientn(&#39;NDVI x 10000&#39;,colours = rev(terrain.colors(10)))+
+  labs(title=&#39;Índice NDVI&#39;,
+  subtitle=&#39;Región de Coquimbo a Región de Los Ríos&#39;)+
+  coord_equal()+
+  theme_minimal()+
+  theme(legend.position=c(.25,.7))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Visualización con <code>ggplot2</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(gridExtra)
+gridExtra::grid.arrange(p1,p2,nrow=1)
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Visualización y edición interactiva</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p><code>leaflet</code>: crea mapas dinámicos con la libreria <code>leaflet</code> de JavaScript
+Joe Cheng, Bhaskar Karambelkar and Yihui Xie (2017). leaflet: <a href="https://CRAN.R-project.org/package=leaflet">Create Interactive Web Maps with the JavaScript &#39;Leaflet&#39; Library. R package version 1.1.0.</a></p></li>
+<li><p><code>mapview</code>:  métodos para visualizar objetos geo-espaciales en forma dinámica.
+Tim Appelhans, Florian Detsch, Christoph Reudenbach and Stefan Woellauer (2017). <a href="https://CRAN.R-project.org/package=mapview">mapview: Interactive Viewing of Spatial Objects in R. R package version 2.1.4.</a></p></li>
+<li><p><code>mapedit</code>: edición interactiva de objetos geo-espaciales. 
+Tim Appelhans and Kenton Russell (2017). mapedit: Interactive Editing of Spatial Data in R. <a href="https://github.com/r-spatial/mapedit">R package version 0.3.6.</a></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Visualización y edición interactiva</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><strong>mapview</strong></p>
+
+<!-- ```{r echo=FALSE,warning=FALSE,message=FALSE} -->
+
+<!-- library(mapview) -->
+
+<!-- m <- mapview(shp,color = "black") -->
+
+<!-- library(htmlwidgets) -->
+
+<!-- mapshot(m, file="mapview.html") -->
+
+<!-- m2 <- m %>% editMap() -->
+
+<!-- ``` -->
+
+<iframe src="mapview.html" width=100% align="right" allowtransparency="true"> </iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue" id="slide-19" style="background:grey;">
+  <hgroup>
+    <h1>Aplicaciones</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Investigación sobre la sequía agrícola en Chile.</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><strong>Integración con otros paquetes</strong></p>
+
+<p><code>Paquetes geoespaciales</code> + <code>tidyverse</code> + <code>knitr</code> + ...</p>
+
+<ul>
+<li>Utilizando datos públicos raster espacio-temporales del estado de la vegetación y la precipitación (MODIS, CHIRPS, TRMM, PERSIANN).(<code>raster</code>)</li>
+<li>Datos de precipitación de estaciones meteorológicas. (<code>vectorial</code>)</li>
+<li>Información del censo agropecuario 2007 (<code>INE, 2007</code>) (<code>vectorial</code>)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Desarrollo de aplicaciones shiny</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src="https://frzambra.shinyapps.io/drought_prediction/" width=100% align="right" allowtransparency="true"> </iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Presente y futuro para datos geo-espaciales con R</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p><code>sf</code>: simple features, sucesor del paquete <code>sp</code>.<br>
+Edzer Pebesma (2017). sf: Simple Features for R. <a href="https://CRAN.R-project.org/package=sf">R package version 0.5-4.</a></p></li>
+<li><p><code>stars</code>: spatiotemporal tidy arrays for R. Sucesor de <code>raster</code>. <a href="https://github.com/r-spatial/stars">En desarrollo</a>.</p></li>
+</ul>
+
+<iframe src="https://github.com/r-spatial/stars" width=100% align="right" allowtransparency="true"></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Información de contacto</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Presentación creada con <a href="http://slidify.org/">slidify</a> y disponible en:<br>
+<a href="https://frzambra.github.io/defensa_tesis_doctorado/">https://frzambra.github.io/defensa_tesis_doctorado/</a></li>
+<li>twitter: <a href="www.twitter.com/frzambra">@frzambra</a></li>
+<li>Linkedin: <a href="www.linkedin.com/in/frzambra">www.linkedin.com/in/frzambra</a></li>
+<li>ORCID: <a href="https://orcid.org/0000-0001-6896-8534">0000-0001-6896-8534</a></li>
+<li>publons: <a href="publons.com/a/1258057/">publons.com/a/1258057/</a></li>
+<li>email: <a href="mailto:frzambra@gmail.com">frzambra@gmail.com</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Background'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='I Información geo-espacial'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='¿Qué son datos geo-espaciales?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Tipos de datos geo-espaciales'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Sistemas de Información Geográfica (SIG)'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='R como Sistema de Información Geográfica (SIG)'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Paquete <code>sp</code>'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Paquete <code>sp</code>'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Análisis geo-espacial'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Análisis geo-espacial'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Análisis geo-espacial'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Visualización con <code>maptools</code> y <code>raster</code>'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Visualización con <code>maptools</code> y <code>raster</code>'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Visualización con <code>ggplot2</code>'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Visualización con <code>ggplot2</code>'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Visualización con <code>ggplot2</code>'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Visualización y edición interactiva'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Visualización y edición interactiva'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Aplicaciones'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Investigación sobre la sequía agrícola en Chile.'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Desarrollo de aplicaciones shiny'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Presente y futuro para datos geo-espaciales con R'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Información de contacto'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='NA'>
+         24
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

@@ -317,7 +317,7 @@ Edzer Pebesma (2017). sf: Simple Features for R. [R package version 0.5-4.](http
 
 - `stars`: spatiotemporal tidy arrays for R. Sucesor de `raster`. [En desarrollo] (https://github.com/r-spatial/stars).
 
-<iframe src="https://github.com/r-spatial/stars" width=100% align="right" allowtransparency="true"></iframe>
+<iframe src="https://github.com/r-spatial/stars/" width=100% align="right" allowtransparency="true"></iframe>
 
 ---
 

@@ -245,7 +245,7 @@ p2 <- ggplot(NULL, aes(x, y)) +
 
 ## Visualización con `ggplot2`
 
-```{r echo=TRUE,fig.width=12}
+```{r echo=TRUE,fig.width=7}
 library(gridExtra)
 gridExtra::grid.arrange(p1,p2,nrow=1)
 ```
@@ -268,14 +268,6 @@ Tim Appelhans and Kenton Russell (2017). mapedit: Interactive Editing of Spatial
 ## Visualización y edición interactiva
 
 **mapview**
-
-<!-- ```{r echo=FALSE,warning=FALSE,message=FALSE} -->
-<!-- library(mapview) -->
-<!-- m <- mapview(shp,color = "black") -->
-<!-- library(htmlwidgets) -->
-<!-- mapshot(m, file="mapview.html") -->
-<!-- m2 <- m %>% editMap() -->
-<!-- ``` -->
 
 <iframe src="mapview.html" width=100% align="right" allowtransparency="true"> </iframe>
 
@@ -308,9 +300,10 @@ Tim Appelhans and Kenton Russell (2017). mapedit: Interactive Editing of Spatial
 - `sf`: simple features, sucesor del paquete `sp`.  
 Edzer Pebesma (2017). sf: Simple Features for R. [R package version 0.5-4.](https://CRAN.R-project.org/package=sf)
 
-- `stars`: spatiotemporal tidy arrays for R. Sucesor de `raster`. [En desarrollo] (https://github.com/r-spatial/stars).
+- `stars`: spatiotemporal tidy arrays for R. Sucesor de `raster`. [En desarrollo] (https://github.com/r-spatial/stars).  
 
-<iframe src="https://github.com/r-spatial/stars/" width=100% align="right" allowtransparency="true"></iframe>
+
+<iframe src="https://github.com/r-spatial/stars/blob/master/README.md" width=100% align="right" allowtransparency="true"></iframe>
 
 ---
 

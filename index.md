@@ -276,14 +276,6 @@ Tim Appelhans and Kenton Russell (2017). mapedit: Interactive Editing of Spatial
 
 **mapview**
 
-<!-- ```{r echo=FALSE,warning=FALSE,message=FALSE} -->
-<!-- library(mapview) -->
-<!-- m <- mapview(shp,color = "black") -->
-<!-- library(htmlwidgets) -->
-<!-- mapshot(m, file="mapview.html") -->
-<!-- m2 <- m %>% editMap() -->
-<!-- ``` -->
-
 <iframe src="mapview.html" width=100% align="right" allowtransparency="true"> </iframe>
 
 ---.segue bg:grey
@@ -315,20 +307,19 @@ Tim Appelhans and Kenton Russell (2017). mapedit: Interactive Editing of Spatial
 - `sf`: simple features, sucesor del paquete `sp`.  
 Edzer Pebesma (2017). sf: Simple Features for R. [R package version 0.5-4.](https://CRAN.R-project.org/package=sf)
 
-- `stars`: spatiotemporal tidy arrays for R. Sucesor de `raster`. [En desarrollo] (https://github.com/r-spatial/stars).
+- `stars`: spatiotemporal tidy arrays for R. Sucesor de `raster`. [En desarrollo] (https://github.com/r-spatial/stars).  
 
-<iframe src="https://github.com/r-spatial/stars/" width=100% align="right" allowtransparency="true"></iframe>
+
+<iframe src="https://github.com/r-spatial/stars/blob/master/README.md" width=100% align="right" allowtransparency="true"></iframe>
 
 ---
 
 ## Información de contacto
 
 - Presentación creada con [slidify](http://slidify.org/) y disponible en:  
-[https://frzambra.github.io/defensa_tesis_doctorado/](https://frzambra.github.io/defensa_tesis_doctorado/)
+[https://frzambra.github.io/meetupR_oct19_2017/](https://frzambra.github.io/meetupR_oct19_2017/)
 - twitter: [@frzambra](www.twitter.com/frzambra)
 - Linkedin: [www.linkedin.com/in/frzambra](www.linkedin.com/in/frzambra)
 - ORCID: [0000-0001-6896-8534](https://orcid.org/0000-0001-6896-8534)
 - publons: [publons.com/a/1258057/](publons.com/a/1258057/)
 - email: [frzambra@gmail.com](mailto:frzambra@gmail.com)
-
----
